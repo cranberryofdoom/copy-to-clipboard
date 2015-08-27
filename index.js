@@ -1,4 +1,4 @@
-function copy(text) {
+function copy(text, msg) {
   try {
     var range = document.createRange();
     var selection = document.getSelection();
@@ -20,7 +20,11 @@ function copy(text) {
       window.clipboardData.setData('text', text);
     } catch (err) {
       console.error('unable to copy, falling back to prompt');
-      window.prompt('Copy to clipboard: Ctrl+C, Enter', text);
+      if (msg) {
+        window.prompt(msg, text);
+      } else {
+        window.prompt('Copy to clipboard: Ctrl+C, Enter', text);
+      }
     }
   } finally {
     if (selection) {
